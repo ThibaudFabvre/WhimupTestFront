@@ -44,7 +44,10 @@ const MatchDetailScreen : FC<{}> = () => {
                     <Text>Result: {selectedMatch.results[0].result ?? null} : {selectedMatch.results[1].result ?? null}</Text>
                 </View>
                 {showTeamMatches ? 
-                    <FlatList data={matchesToRender} renderItem={({ item }) => <Match match={item} />} /> 
+                    <FlatList data={matchesToRender} renderItem={({ item }) => {
+                        const currentMatchDate = new Date(Number(item.date))
+                        return <View><Text>{`${currentMatchDate.toDateString()} ${currentMatchDate.getHours()}:${currentMatchDate.getMinutes()}`}</Text></View>
+                    }} /> 
                     : null
                 }
             </View> : null }
